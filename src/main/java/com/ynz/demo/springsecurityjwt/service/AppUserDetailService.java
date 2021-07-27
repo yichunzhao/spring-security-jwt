@@ -1,4 +1,4 @@
-package com.ynz.demo.springsecurityjwt;
+package com.ynz.demo.springsecurityjwt.service;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
