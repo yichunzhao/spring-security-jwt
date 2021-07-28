@@ -2,6 +2,7 @@ package com.ynz.demo.springsecurityjwt.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
-    private String SECRET_KEY = "-~{[NoC>6 VajG;j}h*Rx[P.KC`p$oLu@&+$)";
+    private String SECRET_KEY = "295ZBKndexJ7KCTvMBUvu6hW2cSxTT3J68qkSGNXcqGvJDBFvKyjpV9CH8GDzyaP";
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
@@ -25,8 +26,9 @@ public class JwtUtil {
     //subject ->username
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 1)).signWith(getSigningKey(SECRET_KEY)).compact();
-                //.signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 1))
+                //.signWith(getSigningKey(SECRET_KEY)).compact();
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -62,6 +64,7 @@ public class JwtUtil {
 
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
+        //String token_ = new String(Base64.getUrlEncoder().encode(token.getBytes(StandardCharsets.UTF_8)));
         return getClaimFromToken(token, Claims::getSubject);
     }
 
