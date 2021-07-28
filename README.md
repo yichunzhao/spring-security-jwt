@@ -1,12 +1,12 @@
 # spring-security-jwt
 
-## Creating JWT via Authentication
+## Creating JWT via Authentication EndingPoint
 
 http://localhost:8080/authenticate
 
 ![image](https://user-images.githubusercontent.com/17804600/127359664-13eb121a-bb1b-44d7-bc11-92c1734a4ced.png)
 
-## Using JWT as Authorization
+## Accesing Protected Resources using JWT Authorization
 
 http://localhost:8080/persons
 
